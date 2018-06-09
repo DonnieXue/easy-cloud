@@ -1,18 +1,11 @@
 package easy.cloud.core.oauth.generator.code.bo;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import com.easy.cloud.core.common.string.utils.EcStringUtils;
 import com.easy.cloud.core.generator.code.base.config.database.EcDatabaseAbstactConfig;
 import com.easy.cloud.core.generator.code.base.config.database.mysql.EcDataBaseMysqlConfig;
 import com.easy.cloud.core.generator.code.base.pojo.rule.EcGenerateRule;
 import com.easy.cloud.core.generator.code.base.sources.database.mysql.EcMysqlDataSources;
 import com.easy.cloud.core.generator.code.base.utils.EcCodeGenerateUtils;
-import com.easy.cloud.core.generator.code.bo.javaenum.EcGenerateJavaErrorCodeBO;
 import com.easy.cloud.core.generator.code.java.constant.EcCodeGenerateJavaConstant.EcClassNameEndWith;
 import com.easy.cloud.core.generator.code.java.constant.EcCodeGenerateJavaConstant.EcIgnoreField;
 import com.easy.cloud.core.generator.code.java.constant.EcCodeGenerateJavaConstant.EcSubModuleDefaultPackageName;
@@ -20,20 +13,16 @@ import com.easy.cloud.core.generator.code.java.pojo.dto.EcGenerateJavaBaseDTO;
 import com.easy.cloud.core.generator.code.java.rule.EcGenerateJavaClassRule;
 import com.easy.cloud.core.generator.code.xml.pojo.bo.mybatis.EcGenerateXmlMybatisBO;
 import com.easy.cloud.core.generator.code.xml.pojo.dto.EcGenerateXmlMybatisDTO;
-
-import easy.cloud.core.oauth.generator.code.bo.javaclass.EcGenerateJavaBOBO;
-import easy.cloud.core.oauth.generator.code.bo.javaclass.EcGenerateJavaControllerBO;
-import easy.cloud.core.oauth.generator.code.bo.javaclass.EcGenerateJavaDAOImplBO;
-import easy.cloud.core.oauth.generator.code.bo.javaclass.EcGenerateJavaDOBO;
-import easy.cloud.core.oauth.generator.code.bo.javaclass.EcGenerateJavaDTOBO;
-import easy.cloud.core.oauth.generator.code.bo.javaclass.EcGenerateJavaLogicImplBO;
-import easy.cloud.core.oauth.generator.code.bo.javaclass.EcGenerateJavaQueryBO;
-import easy.cloud.core.oauth.generator.code.bo.javaclass.EcGenerateJavaServiceImplBO;
-import easy.cloud.core.oauth.generator.code.bo.javaclass.EcGenerateJavaVOBO;
+import easy.cloud.core.oauth.generator.code.bo.javaclass.*;
 import easy.cloud.core.oauth.generator.code.bo.javainf.EcGenerateJavaDAOBO;
 import easy.cloud.core.oauth.generator.code.bo.javainf.EcGenerateJavaJpaDAOBO;
 import easy.cloud.core.oauth.generator.code.bo.javainf.EcGenerateJavaLogicBO;
 import easy.cloud.core.oauth.generator.code.bo.javainf.EcGenerateJavaServiceBO;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /** 生成java代码测试类 */
 public class GenerateJavaTest {
@@ -399,7 +388,7 @@ public class GenerateJavaTest {
 		generateJavaBaseDTO.setCoverSwith(true);
 		EcGenerateRule generateRule = new EcGenerateJavaClassRule(true, true, true, false);
 		try {
-			new EcGenerateJavaErrorCodeBO(generateJavaBaseDTO, generateRule).generateCode();
+//			new EcGenerateJavaErrorCodeBO(generateJavaBaseDTO, generateRule).generateCode();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

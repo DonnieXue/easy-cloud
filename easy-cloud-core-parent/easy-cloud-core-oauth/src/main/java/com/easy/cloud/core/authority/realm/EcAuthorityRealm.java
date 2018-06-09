@@ -1,15 +1,12 @@
 package com.easy.cloud.core.authority.realm;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.LockedAccountException;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import com.easy.cloud.core.operator.sysresource.pojo.dto.SysResourceDTO;
+import com.easy.cloud.core.operator.sysresource.service.SysResourceService;
+import com.easy.cloud.core.operator.sysrole.pojo.dto.SysRoleDTO;
+import com.easy.cloud.core.operator.sysrole.service.SysRoleService;
+import com.easy.cloud.core.operator.sysuser.pojo.dto.SysUserDTO;
+import com.easy.cloud.core.operator.sysuser.service.SysUserService;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -17,13 +14,14 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.easy.cloud.core.operator.sysresource.pojo.dto.SysResourceDTO;
-import com.easy.cloud.core.operator.sysresource.service.SysResourceService;
-import com.easy.cloud.core.operator.sysrole.pojo.dto.SysRoleDTO;
-import com.easy.cloud.core.operator.sysrole.service.SysRoleService;
-import com.easy.cloud.core.operator.sysuser.pojo.dto.SysUserDTO;
-import com.easy.cloud.core.operator.sysuser.service.SysUserService;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+/**
+ * @author 无心
+ */
 public class EcAuthorityRealm extends AuthorizingRealm {
 	@Autowired
 	private SysUserService sysUserService;
