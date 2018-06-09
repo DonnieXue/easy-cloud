@@ -43,7 +43,7 @@ public class EcAuthorityAuthenticator {
 
         apiResponse.code(200);
         apiResponse.message(EcAuthorityConstant.SUCCESS);
-        //todo 校验用户是否存在 落地请求数据
+        // 校验用户是否存在 落地请求数据
         if(!ecAuthorityConditional.isEffectiveWithSystem(systemId)){
             apiResponse.code(400);
             apiResponse.message(EcAuthorityConstant.INVALID);
@@ -52,7 +52,7 @@ public class EcAuthorityAuthenticator {
             apiResponse.code(400);
             apiResponse.message(EcAuthorityConstant.NO_EXITS);
         }
-        // todo 返回授权调用code 一般使用一次 五分钟
+        //  返回授权调用code 一般使用一次 五分钟
         Long code = EcIdWorker.getFlowIdWorkerInstance().nextId();
         redisManager.set((systemId+userAccount).getBytes(),code.toString().getBytes(),300);
         apiResponse.data(code);

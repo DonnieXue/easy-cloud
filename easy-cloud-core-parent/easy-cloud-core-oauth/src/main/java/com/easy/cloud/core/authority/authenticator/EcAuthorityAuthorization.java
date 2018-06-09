@@ -34,7 +34,13 @@ public class EcAuthorityAuthorization {
     /**
      *
      * 校验用户凭证 本系统分发出去用户确定用户有效唯一凭证 可以是登陆token
+     * 第零 确定system是否有效
+     * 第一确定code有效
+     * 第二验证用户token
+     * 第三分配数据访问权限 保存redis mq落地db
+     * 第四 返回 授权令牌
      *
+     * 之后第三方系统 携带 系统id 用户账号 以及想访问的资源 像我系统请求数据
      */
     @RequestMapping(value = "user",method = RequestMethod.POST)
     public APIResponse authenticate(@RequestParam(value = "user_account",required = true) String userAccount,
@@ -44,16 +50,6 @@ public class EcAuthorityAuthorization {
                                     @RequestParam(value = "system_need_permission",required = true) String systemPermission,
                                     @RequestParam(value = "code" ,defaultValue = "",required = true) String code){
         APIResponse apiResponse = APIResponse.build();
-
-        /**
-         * 第零 确定system是否有效
-         * 第一确定code有效
-         * 第二验证用户token
-         * 第三分配数据访问权限 保存redis mq落地db
-         * 第四 返回 授权令牌
-         *
-         * 之后第三方系统 携带 系统id 用户账号 以及想访问的资源 像我系统请求数据
-         */
 
         if(!ecAuthorityConditional.isEffectiveWithSystem(systemId)){
             apiResponse.code(400);
