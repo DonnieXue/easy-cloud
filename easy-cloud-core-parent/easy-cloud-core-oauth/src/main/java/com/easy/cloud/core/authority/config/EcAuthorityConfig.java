@@ -118,6 +118,7 @@ public class EcAuthorityConfig {
 	 * 
 	 * @return
 	 */
+	@Bean
 	public RedisManager redisManager() {
 		RedisManager redisManager = new RedisManager();
 		redisManager.setHost(host);

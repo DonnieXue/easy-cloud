@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("authenticate")
+@RequestMapping("authorization")
 public class EcAuthorityAuthorization {
 
 
@@ -43,7 +43,7 @@ public class EcAuthorityAuthorization {
      * 之后第三方系统 携带 系统id 用户账号 以及想访问的资源 像我系统请求数据
      */
     @RequestMapping(value = "user",method = RequestMethod.POST)
-    public APIResponse authenticate(@RequestParam(value = "user_account",required = true) String userAccount,
+    public APIResponse authorization(@RequestParam(value = "user_account",required = true) String userAccount,
                                     @RequestParam(value = "user_proof",required = true) String userProof,
                                     @RequestParam(value = "system_id",required = true) String systemId,
                                     @RequestParam(value = "system_name",required = true) String systemName,
