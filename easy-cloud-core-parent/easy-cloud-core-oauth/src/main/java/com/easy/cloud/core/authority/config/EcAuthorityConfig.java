@@ -1,7 +1,8 @@
 package com.easy.cloud.core.authority.config;
 
-import java.io.IOException;
-
+import com.easy.cloud.core.authority.manager.EcSessionManager;
+import com.easy.cloud.core.authority.realm.EcAuthorityRealm;
+import com.easy.cloud.core.cache.redis.config.EcRedisProperties;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.SessionManager;
@@ -20,9 +21,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.Resource;
 import org.yaml.snakeyaml.Yaml;
 
-import com.easy.cloud.core.authority.manager.EcSessionManager;
-import com.easy.cloud.core.authority.realm.EcAuthorityRealm;
-import com.easy.cloud.core.cache.redis.config.EcRedisProperties;
+import java.io.IOException;
 
 /**
  * 
@@ -124,7 +123,7 @@ public class EcAuthorityConfig {
 		redisManager.setPort(port);
 		// 配置缓存过期时间
 		redisManager.setTimeout(timeout);
-//		redisManager.setPassword(password);
+		///redisManager.setPassword(password);
 		redisManager.setJedisPoolConfig(redisProperties);
 		return redisManager;
 	}
