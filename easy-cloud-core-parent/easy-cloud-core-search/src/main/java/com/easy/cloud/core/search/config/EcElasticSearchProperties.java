@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ConfigurationProperties(prefix = "spring.data.elasticsearch")
-public class ElasticSearchProperties {
+public class EcElasticSearchProperties {
     private String clusterName;
     private String clusterNodes;
 
