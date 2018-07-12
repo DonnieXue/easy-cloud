@@ -2,15 +2,28 @@ package com.easy.cloud.core.search.core.query.builder;
 
 import com.easy.cloud.core.search.constant.EcElasticSearchQueryConstant;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
+import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.elasticsearch.client.Client;
+import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @Title: ESQueryBuilderConstructor
+ * @Description:
+ * @Author tudou
+ * @Date 2018/6/21 15:17
+ * @Version 1.0
+ */
 public class ESQueryBuilderConstructor {
 
+    public static final ESQueryBuilderConstructor BUILDER_CONSTRUCTOR = instance();
     /**
      * 设置默认为最大值
      */
@@ -23,6 +36,12 @@ public class ESQueryBuilderConstructor {
     private String desc;
 
     private String scrollId;
+
+    private ESQueryBuilderConstructor(){}
+
+    private static ESQueryBuilderConstructor instance(){
+        return new ESQueryBuilderConstructor();
+    }
 
     /**
      * 查询条件容器
@@ -66,6 +85,36 @@ public class ESQueryBuilderConstructor {
             return queryBuilder;
         } else {
             return null;
+        }
+    }
+    /**
+     * 构造searchRequestBuilder
+     * @param index
+     * @param type
+     * @return
+     */
+    public SearchRequestBuilder getSearchRequestBuilder(Client client, String index, String type) {
+        SearchRequestBuilder searchRequestBuilder = client.prepareSearch(index).setTypes(type);
+        //排序
+        addSort(searchRequestBuilder);
+        //设置查询体
+        searchRequestBuilder.setQuery(this.listBuilders());
+        searchRequestBuilder.setSize(this.getSize());
+        searchRequestBuilder.setScroll(new TimeValue(600000));
+        return searchRequestBuilder;
+    }
+    /**
+     * 添加排序
+     *
+     * @param searchRequestBuilder
+     */
+    private void addSort(SearchRequestBuilder searchRequestBuilder) {
+        if (StringUtils.isNotEmpty(this.getAsc())) {
+            searchRequestBuilder.addSort(this.getAsc(), SortOrder.ASC);
+//            searchRequestBuilder.addSor
+        }
+        if (StringUtils.isNotEmpty(this.getDesc())) {
+            searchRequestBuilder.addSort(this.getDesc(), SortOrder.DESC);
         }
     }
 

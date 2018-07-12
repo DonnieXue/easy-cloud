@@ -27,7 +27,7 @@ import static org.apache.commons.lang.StringUtils.substringBeforeLast;
  * @Description:
  * @Author tudou
  * @Date 2018/6/12 15:42
- * @Version 2.0
+ * @Version 1.0
  */
 
 @Configuration
@@ -38,7 +38,7 @@ public class EcElasticSearchConfig {
     private EcElasticSearchProperties elasticSearchProperties;
 
     @Bean
-    public Client getTransportClient() throws UnknownHostException {
+    public TransportClient getTransportClient() throws UnknownHostException {
 //        org.springframework.data.mapping.model.Property
         Settings settings = Settings.builder()
                 //集群嗅探功能，可以动态添加新主机并删除旧主机

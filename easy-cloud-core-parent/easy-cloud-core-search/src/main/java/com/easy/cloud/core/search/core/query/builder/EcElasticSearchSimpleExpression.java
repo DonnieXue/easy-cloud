@@ -7,7 +7,13 @@ import org.elasticsearch.index.query.QueryBuilders;
 
 import java.util.Collection;
 
-
+/**
+ * @Title: EcElasticSearchSimpleExpression
+ * @Description:
+ * @Author tudou
+ * @Date 2018/6/21 15:17
+ * @Version 1.0
+ */
 public class EcElasticSearchSimpleExpression {
     /**
      * 属性名

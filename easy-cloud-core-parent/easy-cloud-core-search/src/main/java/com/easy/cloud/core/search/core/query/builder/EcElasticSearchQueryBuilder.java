@@ -8,6 +8,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * @Title: EcElasticSearchQueryBuilder
+ * @Description:
+ * @Author tudou
+ * @Date 2018/6/21 15:17
+ * @Version 1.0
+ */
 public class EcElasticSearchQueryBuilder implements EcElasticSearchCriterion {
 
     private List<QueryBuilder> list = new ArrayList<>();

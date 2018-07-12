@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  * @Description:
  * @Author tudou
  * @Date 2018/6/14 17:02
- * @Version 2.0
+ * @Version 1.0
  */
 @Configuration
 @ConfigurationProperties(prefix = "spring.data.elasticsearch")

@@ -1,5 +1,7 @@
 package com.easy.cloud.core.search.core.query;
 
+import com.easy.cloud.core.search.core.query.builder.ESQueryBuilderConstructor;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse;
@@ -9,8 +11,11 @@ import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.unit.TimeValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,14 +25,48 @@ import java.util.Map;
 @Component
 public class EcElasticSearch {
 
-    public Logger logger = Logger.getLogger(EcElasticSearch.class);
+    private static final Logger logger = Logger.getLogger(EcElasticSearch.class);
 
     @Autowired
-    TransportClient client;
+    private TransportClient client;
 
 
+    /**
+     * A search scroll request to continue searching a previous scrollable search request.
+     * @param scrollId
+     * @return
+     */
+    public SearchResponse  searchScroll(String scrollId){
+        SearchResponse searchResponse = client.prepareSearchScroll(scrollId).setScroll(new TimeValue(600000)).execute()
+                .actionGet();
+        return searchResponse;
+    }
 
-
+    /**
+     * 功能描述：查询
+     *
+     * @param index       索引名
+     * @param type        类型
+     * @param constructor 查询构造
+     */
+    public SearchResponse scrollsearch(String index, String type, ESQueryBuilderConstructor constructor) throws Exception {
+        SearchResponse searchResponse = null;
+        try {
+            String scrollId = constructor.getScrollId();
+            if (scrollId != null && !"".equals(scrollId)) {
+                searchResponse = searchScroll(scrollId);
+            } else {
+                SearchRequestBuilder searchRequestBuilder = constructor.getSearchRequestBuilder(client, index, type);
+//                searchRequestBuilder.
+                logger.debug(searchRequestBuilder.toString());
+                searchResponse = searchRequestBuilder.execute().actionGet();
+            }
+            logger.debug(searchResponse.toString());
+        } catch (Exception e) {
+            logger.error("查询es出错", e);
+        }
+        return searchResponse;
+    }
 
 
     /**
